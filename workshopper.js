@@ -143,45 +143,84 @@ function Workshopper (options) {
     return
   }
 
-  if (mode == 'verify' || mode == 'run') {
-    exercise = this.current && this.loadExercise(this.current)
+  var verifying=false
 
-    if (!this.current)
-      return error(this.__('error.exercise.none_active'))
+  var thiis = this
+  new Promise(function (resolve2,reject) {
+      if (mode == 'verify' || mode == 'run') {
+          verifying = true;
 
-    if (!exercise)
-      return error(this.__('error.exercise.missing', {name: name}))
+          exercise = thiis.current && thiis.loadExercise(thiis.current)
+          exercise.verifyExercise(exercise).then(function (exe) {
+              exercise=exe;
 
-    if (exercise.requireSubmission !== false && argv._.length == 1)
-      return error(this.__('ui.usage', {appName: this.appName, mode: mode}))
+              if (!thiis.current)
+                  return error(thiis.__('error.exercise.none_active'))
 
-    return this.execute(exercise, mode, argv._.slice(1))
-  }
+              if (!exercise)
+                  return error(thiis.__('error.exercise.missing', {name: name}))
 
-  if (argv._[0] == 'next') {
-    var remainingAfterCurrent = this.exercises.slice(this.exercises.indexOf(this.current))
+              if (exercise.requireSubmission !== false && argv._.length == 1)
+                  return error(thiis.__('ui.usage', {appName: thiis.appName, mode: mode}))
 
-    var completed = this.getData('completed')
+              reject("rejected")
+              return thiis.execute(exercise, mode, argv._.slice(1))
+          }).catch(function (rej) {
+              console.log(rej.toString())
+          })
 
-    if (!completed)
-      return error(this.__('error.exercise.none_active') + '\n')
+        /*
+         if (!this.current)
+         return error(this.__('error.exercise.none_active'))
 
-    var incompleteAfterCurrent = remainingAfterCurrent.filter(function (elem) {
-      return completed.indexOf(elem) < 0
-    })
+         if (!exercise)
+         return error(this.__('error.exercise.missing', {name: name}))
 
-    if (incompleteAfterCurrent.length === 0)
-      return console.log(this.__('error.no_uncomplete_left') + '\n')
+         if (exercise.requireSubmission !== false && argv._.length == 1)
+         return error(this.__('ui.usage', {appName: this.appName, mode: mode}))
 
-    return onselect.call(this, incompleteAfterCurrent[0])
-  }
+         return this.execute(exercise, mode, argv._.slice(1))
+         */
 
-  if (mode == 'reset') {
-    this.reset()
-    return console.log(this.__('progress.reset', {title: this.__('title')}))
-  }
+      }
+      resolve2(thiis)
+  }).then(function (thiis) {
+      continueProcess(mode,thiis,verifying)
+  }).catch(function () {
+      return
+  })
 
-  this.printMenu()
+
+
+}
+
+function continueProcess(mode,thiis,verifying){
+ if (argv._[0] == 'next') {
+ var remainingAfterCurrent = thiis.exercises.slice(thiis.exercises.indexOf(thiis.current))
+
+ var completed = thiis.getData('completed')
+
+ if (!completed)
+ return error(thiis.__('error.exercise.none_active') + '\n')
+
+ var incompleteAfterCurrent = remainingAfterCurrent.filter(function (elem) {
+ return completed.indexOf(elem) < 0
+ })
+
+ if (incompleteAfterCurrent.length === 0)
+ return console.log(thiis.__('error.no_uncomplete_left') + '\n')
+
+ return onselect.call(thiis, incompleteAfterCurrent[0])
+ }
+
+ if (mode == 'reset') {
+ thiis.reset()
+ return console.log(thiis.__('progress.reset', {title: thiis.__('title')}))
+ }
+
+ if(!verifying)
+     thiis.printMenu()
+
 }
 
 inherits(Workshopper, EventEmitter)
@@ -202,6 +241,11 @@ Workshopper.prototype.end = function (mode, pass, exercise, callback) {
 // overall exercise fail
 Workshopper.prototype.exerciseFail = function (mode, exercise) {
   console.log('\n' + chalk.bold.red('# ' + this.__('solution.fail.title')) + '\n')
+
+  console.log("-----------------------------------------------");
+  console.log('\n' + exercise.message + '\n');
+  console.log("-----------------------------------------------");
+
   console.log(this.__('solution.fail.message', {name: this.__('exercise.' + exercise.name)}))
 
   this.end(mode, false, exercise)
@@ -211,6 +255,9 @@ Workshopper.prototype.exerciseFail = function (mode, exercise) {
 // overall exercise pass
 Workshopper.prototype.exercisePass = function (mode, exercise) {
   console.log('\n' + chalk.bold.green('# ' + this.__('solution.pass.title')) + '\n')
+  console.log("-----------------------------------------------");
+  console.log('\n' + exercise.message + '\n');
+  console.log("-----------------------------------------------");
   console.log(chalk.bold(this.__('solution.pass.message', {name: this.__('exercise.' + exercise.name)})) + '\n')
 
   var done = function done () {
@@ -424,7 +471,6 @@ Workshopper.prototype._printHelp = function () {
   this._printUsage(print.localisedFile.bind(print, this.appName, this.appDir, this.helpFile, this.lang))
 }
 
-
 Workshopper.prototype._printUsage = function (callback) {
   print.localisedFirstFile(this.appName, this.appDir, [
     path.join(__dirname, './i18n/usage/{lang}.txt'),
@@ -481,7 +527,7 @@ Workshopper.prototype.loadExercise = function (name) {
   if (!stat || !stat.isFile())
     return error(this.__('error.exercise.missing_file', {exerciseFile: meta.exerciseFile}))
 
-  exercise = require(meta.exerciseFile)
+  exercise = require(meta.exerciseFile).generateExercise(process.cwd())
 
   if (!exercise || typeof exercise.init != 'function')
     return error(this.__('error.exercise.not_a_workshopper', {exerciseFile: meta.exerciseFile}))
