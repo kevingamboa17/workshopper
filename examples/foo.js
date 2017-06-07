@@ -6,7 +6,7 @@ const workshopper = require('../')
 
 
 workshopper({
-    name        : 'foo'
+    name        : 'ejercicio_3'
   , title       : 'FOO OR DIE'
   , exerciseDir : path.join(__dirname, 'exercises')
   , appDir      : __dirname

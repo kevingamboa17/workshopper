@@ -20,3 +20,5 @@
     Verify your program against the expected output.
   {bold}{green}{appname}{/green} -l <language>{/bold}
     Change the system to the specified language.
+  {bold}{green}{appname}{/green} config{/bold}
+    Config the android project for the first time.

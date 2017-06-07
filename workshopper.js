@@ -16,6 +16,8 @@ const showMenu         = require('./exerciseMenu')
 /* jshint +W079 */
 
 const defaultWidth = 65
+var configFile = require('../../config')
+
 
 function Workshopper (options) {
   if (!(this instanceof Workshopper))
@@ -216,7 +218,11 @@ function continueProcess(mode,thiis,verifying){
  if (mode == 'reset') {
  thiis.reset()
  return console.log(thiis.__('progress.reset', {title: thiis.__('title')}))
- }
+}
+
+if(mode=='config'){
+  return configFile.config();
+}
 
  if(!verifying)
      thiis.printMenu()

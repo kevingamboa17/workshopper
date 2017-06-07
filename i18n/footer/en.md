@@ -2,3 +2,4 @@
  __»__ To execute your program in a test environment, run: `{appname} run program.js`
  __»__ To verify your program, run: `{appname} verify program.js`
  __»__ For help run: `{appname} help`
+ __»__ To config the project for the first time, run: `{appname} config`
