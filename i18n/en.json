@@ -8,20 +8,8 @@
   },
   "language": {
     "_current": "CURRENT",
-    "de": "German (Deutsch)",
     "en": "English",
-    "fr": "French (français)",
-    "ja": "Japanese (日本語)",
-    "zh-cn": "Chinese (中文)",
-    "zh-tw": "Taiwanese (國語)",
-    "es": "Spanish (Español)",
-    "pt-br": "Brazilian Portuguese (Português)",
-    "vi": "Vietnamese (Tiếng Việt)",
-    "uk": "Ukrainian (Українська)",
-    "ru": "Russian (Русский)",
-    "ko": "Korean (한국어)",
-    "pl": "Polish (Polski)",
-    "nb-no": "Norsk (Norsk)"
+    "es": "Spanish (Español)"
   },
   "error": {
     "exercise": {
