@@ -1,22 +1,22 @@
 {bold}{yellow}Usage{/yellow}{/bold}
 
-  {bold}{green}{appname}{/green}{/bold}
+  {bold}{green}androidbasics{/green}{/bold}
     Show a menu to interactively select a workshop.
-  {bold}{green}{appname}{/green} list{/bold}
+  {bold}{green}androidbasics{/green} list{/bold}
     Show a newline-separated list of all the workshops.
-  {bold}{green}{appname}{/green} select NAME{/bold}
+  {bold}{green}androidbasics{/green} select NAME{/bold}
     Select a workshop.
-  {bold}{green}{appname}{/green} current{/bold}
+  {bold}{green}androidbasics{/green} current{/bold}
     Show the currently selected workshop.
-  {bold}{green}{appname}{/green} print{/bold}
+  {bold}{green}androidbasics{/green} print{/bold}
     Print the instructions for the currently selected workshop.
-  {bold}{green}{appname}{/green} next{/bold}
+  {bold}{green}androidbasics{/green} next{/bold}
     Print the instructions for the next incomplete workshop after the currently selected workshop.
-  {bold}{green}{appname}{/green} reset{/bold}
+  {bold}{green}androidbasics{/green} reset{/bold}
     Reset completed workshop progress.
-  {bold}{green}{appname}{/green} verify this{/bold}
+  {bold}{green}androidbasics{/green} verify this{/bold}
     Verify your program against the expected output.
-  {bold}{green}{appname}{/green} -l <language>{/bold}
+  {bold}{green}androidbasics{/green} -l <language>{/bold}
     Change the system to the specified language.
-  {bold}{green}{appname}{/green} config{/bold}
+  {bold}{green}androidbasics{/green} config{/bold}
     Config the android project for the first time.

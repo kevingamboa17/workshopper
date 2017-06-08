@@ -533,7 +533,7 @@ Workshopper.prototype.loadExercise = function (name) {
   if (!stat || !stat.isFile())
     return error(this.__('error.exercise.missing_file', {exerciseFile: meta.exerciseFile}))
 
-  exercise = require(meta.exerciseFile).generateExercise(process.cwd())
+  exercise = require(meta.exerciseFile).generateExercise(this.lang)
 
   if (!exercise || typeof exercise.init != 'function')
     return error(this.__('error.exercise.not_a_workshopper', {exerciseFile: meta.exerciseFile}))
