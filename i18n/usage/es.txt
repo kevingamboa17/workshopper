@@ -18,5 +18,3 @@
     Verify your program against the expected output.
   {bold}{green}androidbasics{/green} -l <language>{/bold}
     Change the system to the specified language.
-  {bold}{green}androidbasics{/green} config{/bold}
-    Config the android project for the first time.
