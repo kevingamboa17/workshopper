@@ -39,8 +39,8 @@
     }
   },
   "ui": {
-    "return": "Escriba '{{androidbasics}}' para mostrar el menu.\n",
-    "usage": "Uso: {{androidbasics}} {{mode}} this"
+    "return": "Escriba 'androidbasics' para mostrar el menu.\n",
+    "usage": "Uso: androidbasics {{mode}} this"
   },
   "progress": {
     "reset": "{{title}} progreso reiniciado",

@@ -40,8 +40,8 @@
     }
   },
   "ui": {
-    "return": "Type '{{androidbasics}}' to show the menu.\n",
-    "usage": "Usage: {{androidbasics}} {{mode}} this"
+    "return": "Type 'androidbasics' to show the menu.\n",
+    "usage": "Usage: androidbasics {{mode}} this"
   },
   "progress": {
     "reset": "{{title}} progress reset",
