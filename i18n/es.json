@@ -30,7 +30,7 @@
       "message": "Su solución a {{{name}}} no pasó. Intentalo de nuevo!\n"
     },
     "pass": {
-      "title": "PASO",
+      "title": "PASÓ",
       "message": "Su solución a {{{name}}} pasó sin problemas!"
     },
     "notes": {
@@ -39,8 +39,8 @@
     }
   },
   "ui": {
-    "return": "Escriba '{{appName}}' para mostrar el menu.\n",
-    "usage": "Uso: {{appName}} {{mode}} miprograma.js"
+    "return": "Escriba '{{androidbasics}}' para mostrar el menu.\n",
+    "usage": "Uso: {{androidbasics}} {{mode}} this"
   },
   "progress": {
     "reset": "{{title}} progreso reiniciado",
