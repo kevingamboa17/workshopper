@@ -72,7 +72,7 @@ function showMenu (opts, i18n) {
   menu.on('select', function (label) {
     menu.y = 0
     menu.reset()
-    menu.close()
+//    menu.close()
     process.stdin.pause()
     process.stdin.removeListener('data', passDataToMenu)
     menuStream.unpipe(process.stdout)
